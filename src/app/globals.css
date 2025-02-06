@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primaryBackground: rgba(251,252,255,255);
+  --secondaryBackground: rgba(209,222,249,255);
+  --Patina: rgba(105,157,147,255);
+  --primary: rgba(25,19,89,255);
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+      display: none;
+  }
+ /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+}
+}
+
+body {
+  color: var(--primary);
+  background: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
