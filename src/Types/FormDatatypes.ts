@@ -1,4 +1,15 @@
-export type FormData = {
+// Form data structure
+export interface Traveler {
+    firstName: string;
+    lastName: string;
+    passportNumber: string;
+    nationality: string;
+    month: string;
+    day: number | null;
+    year: number | null;
+}
+
+export interface FormDataTypes {
     firstName: string;
     lastName: string;
     city: string;
@@ -9,6 +20,7 @@ export type FormData = {
     passport: string;
     nationality: string;
     month: string;
-    day: number;
-    year: number
+    day: number | null;
+    year: number | null;
+    otherTravelers: Traveler[];
 }

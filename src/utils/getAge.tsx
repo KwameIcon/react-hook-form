@@ -1,5 +1,5 @@
 export const getAge = (month: number | undefined, day: number | undefined, year: number | undefined) => {
-    if (!month || !day || !year) return null; // Return null if any value is missing
+    if (!month || !day || !year) return null;
     const today = new Date();
     const birthDate = new Date(year, month - 1, day);
 
@@ -11,7 +11,7 @@ export const getAge = (month: number | undefined, day: number | undefined, year:
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
 
-    // Check if the birthday hasn't occurred yet this year, and adjust the age
+    // Check if the birthday hasn't occurred yet this year
     if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
         age--;
     }

@@ -1,78 +1,117 @@
 "use client"
+
 import { InsuranceCard } from "@/Components";
 import { Form1, Form2, FormLayout } from "@/Components/Forms";
 import { FormProgress } from "@/Components/sections";
-import { FieldValues, FormProvider, useForm } from "react-hook-form";
+import { FieldValues, FormProvider, useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 import { useEffect, useState } from "react";
+import { FormDataTypes } from "@/Types/FormDatatypes";
 
+
+
+// default form values
+const defaultValues = {
+    firstName: "",
+    lastName: "",
+    city: "",
+    country: "",
+    phone: "",
+    email: "",
+    alternateEmail: "",
+    passport: "",
+    nationality: "",
+    month: "",
+    day: null,
+    year: null,
+    otherTravelers: [],
+}
 
 
 
 export default function Forms() {
-    const methods = useForm();
-    const { control } = methods;
+    // form data
+    const methods = useForm<FormDataTypes>({
+        defaultValues
+    });
+    const { control, handleSubmit, formState: { errors } } = methods;
+
+
+
+    // useFieldArray
+    const { fields, append, remove } = useFieldArray<FormDataTypes, "otherTravelers", "id" >({
+        control,
+        name: "otherTravelers",
+    });
+
+
+
     const [isClient, setIsClient] = useState(false);
-  
-  
+
+
+
+    // submit form data
     const onSubmit = (data: FieldValues) => {
-      console.log(data);
-    }
-  
+    };
+
+
     // display react hook form on page render
     useEffect(() => {
-      setIsClient(true);
+        setIsClient(true);
     }, []);
-  
-  
-    // render forms based on number of travelers
-    const renderForms = (travelers: number) => {
-      const forms = [];
-      if (travelers <= 1) return;
-      for (let i = 1; i < travelers; i++) {
-        forms.push(
-          <Form2 firstName={`firstName${i}`} lastName={`lastName${i}`} passport={`passportNumber${i}`} nationality={`nationality${i}`} month={`month${i}`} day={`day${i}`} year={`year${i}`} />
-        )
-      }
-      return forms;
-    }
+
+
+    if (!isClient) return null;
 
 
     return (
-        <section>
+        <section className="w-[95%] m-auto xl:w-full grid grid-cols-1 gap-10">
             <FormProvider {...methods}>
-
                 {/* form progress section */}
                 <div className="w-full">
                     <FormProgress />
                 </div>
 
+
                 {/* form content */}
-                <div className="w-full grid grid-cols-1 lg:flex lg:items-start lg:justify-start lg:gap-5 xl:gap-16 relative">
-
-
-                    <div className="w-fulll h-full md:w-10/12 m-auto lg:m-0 p-2 xl:p-0 lg:w-6/12">
-                        <form className="w-full h-full grid grid-cols-1 gap-16 place-items-start" noValidate>
+                <div className="w-full md:w-full m-auto grid grid-cols-1 lg:flex lg:items-start lg:justify-start lg:gap-5 xl:gap-16 relative">
+                    <form className="w-full grid grid-cols-1 lg:grid-cols-2 lg:gap-5 xl:gap-16 relative" onSubmit={handleSubmit(onSubmit)} noValidate>
+                        <div className="flex-1 w-full h-fit grid grid-cols-1 gap-10 place-items-start">
                             <FormLayout header="Traveler details">
                                 <Form1 />
                             </FormLayout>
-                            {
-                                renderForms(5)?.map((form, index) => (
-                                    <FormLayout header={`Traveler ${index + 2} details`} key={index}>
-                                        {form}
-                                    </FormLayout>
-                                ))
-                            }
-                        </form>
-                        {isClient && <DevTool control={control} />}
-                    </div>
+
+                            {/* Map over the fields to render Form1 for each traveler */}
+                            {fields.map((field, index) => (
+                                <FormLayout header={`Traveler ${index + 2} details`} key={field.id}>
+                                    <Form2
+                                        fieldIndex={index}
+                                        errors={errors}
+
+                                    />
+                                    {/* Button to remove traveler */}
+                                    <button type="button" onClick={() => remove(index)}
+                                        className="w-fit h-10 px-2 my-5 text-sm bg-red-800 rounded text-white flex items-center justify-center">
+                                        Remove Traveler {index + 2}
+                                    </button>
+                                </FormLayout>
+                            ))}
+
+                            {/* Button to add new traveler */}
+                            <button type="button" onClick={() => append({ firstName: "", lastName: "", passportNumber: "", nationality: "", month: "", day: null, year: null })}
+                                className="w-full m-auto h-12 bg-primary rounded-full text-white flex items-center justify-center">
+                                Add Traveler
+                            </button>
+                        </div>
 
 
-                    <div className="w-full lg:max-h-[50rem] lg:w-5/12 flex items-center justify-center mt-10 lg:mt-0">
-                        <InsuranceCard onSubmit={onSubmit} />
-                    </div>
+                        <div className="flex-1 w-full lg:max-h-[50rem] flex items-center justify-center mt-10 lg:mt-0">
+                            <InsuranceCard />
+                        </div>
+                    </form>
+                    {isClient && <DevTool control={control} />}
                 </div>
             </FormProvider>
         </section>
-    )
+    );
 }

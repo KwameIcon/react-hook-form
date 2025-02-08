@@ -6,13 +6,8 @@ import { FieldValues, useFormContext } from "react-hook-form";
 
 
 
-type InsuranceCardProps = {
-    onSubmit: (data:FieldValues) => void;
-}
 
-
-
-export default function InsuranceCard({onSubmit}: InsuranceCardProps) {
+export default function InsuranceCard() {
     const [isInsuranceSummary, setIsInsuranceSummary] = useState(true);
     const [isGuarantee, setIsGuarantee] = useState(false);
     const [isTermsAgreed, setIsTermsAgreed] = useState(false);
@@ -56,15 +51,15 @@ export default function InsuranceCard({onSubmit}: InsuranceCardProps) {
             </div>
 
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
                 <button type="submit" className="w-10/12 m-auto h-12 bg-primary rounded-full text-white flex items-center justify-center">Confirm my insurance</button>
-            </form>
+            </div>
 
             <div className="grid grid-cols-1 font-light">
                 <p className="w-full text-[10px] text-primary">By clicking &apos;CONFIRM MY INSURANCE&apos;, I accept the global consent: pre-contractual information notice, the insurance IPID, the General Conditions, the Terms of Use, the Legal Notice, the Privacy Policy, the Cookies Policy, and the Disclaimer.</p>
 
                 <div className="flex items-center justify-center gap-2">
-                    <button className={`w-16 m-auto h-5 ${isTermsAgreed ? "bg-primary" : 'bg-white border border-primary'} rounded-full text-white flex items-center justify-center relative after:absolute after:z-10 after:w-6/12 after:h-3/5 ${isTermsAgreed ? "after:bg-white after:right-1" : "after:bg-primary after:left-1"} after:rounded-full `} onClick={() => setIsTermsAgreed(!isTermsAgreed)} />
+                    <button type="button" className={`w-16 m-auto h-5 ${isTermsAgreed ? "bg-primary" : 'bg-white border border-primary'} rounded-full text-white flex items-center justify-center relative after:absolute after:z-10 after:w-6/12 after:h-3/5 ${isTermsAgreed ? "after:bg-white after:right-1" : "after:bg-primary after:left-1"} after:rounded-full `} onClick={() => setIsTermsAgreed(!isTermsAgreed)} />
                     <p className="w-full text-[10px] text-primary">I agree that Insurte and its partners can use my personal data to send me, including by email, information about their products and services, according to Insurte&apos;s Privacy Policy.</p>
                 </div>
             </div>

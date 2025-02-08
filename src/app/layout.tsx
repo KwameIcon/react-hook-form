@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer, Header } from "@/Components";
-import QueryProvider from "@/library/QueryClientProvider";
 
 // Set up the fonts
 const geistSans = Geist({
@@ -29,12 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased w-screen h-screen overflow-hidden overflow-y-auto`}>
-        <div className="w-full lg:w-[98%] xl:w-10/12 xxl:w-3/5 m-auto h-auto relative">
-          <QueryProvider> 
+        <div className="w-full lg:w-[98%] xl:w-10/12 xxl:w-3/5 grid grid-cols-1 m-auto h-auto relative">
             <Header />
             {children}
             <Footer />
-          </QueryProvider>
         </div>
       </body>
     </html>
