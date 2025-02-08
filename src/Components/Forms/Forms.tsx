@@ -52,6 +52,7 @@ export default function Forms() {
 
     // submit form data
     const onSubmit = (data: FieldValues) => {
+        console.log(data)
     };
 
 
@@ -98,7 +99,7 @@ export default function Forms() {
                             ))}
 
                             {/* Button to add new traveler */}
-                            <button type="button" onClick={() => append({ firstName: "", lastName: "", passportNumber: "", nationality: "", month: "", day: null, year: null })}
+                            <button type="button" onClick={() => append({ firstName: "", lastName: "", passport: "", nationality: "", month: "", day: null, year: null })}
                                 className="w-full m-auto h-12 bg-primary rounded-full text-white flex items-center justify-center">
                                 Add Traveler
                             </button>

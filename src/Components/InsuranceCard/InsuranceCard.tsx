@@ -2,7 +2,6 @@
 import { useState } from "react";
 import InsuranceSummaryPlan from "../InsuranceSummary/InsuaranceSummaryPlan";
 import Guarantees from "../Guarantees/Guarantees";
-import { FieldValues, useFormContext } from "react-hook-form";
 
 
 
@@ -12,7 +11,6 @@ export default function InsuranceCard() {
     const [isGuarantee, setIsGuarantee] = useState(false);
     const [isTermsAgreed, setIsTermsAgreed] = useState(false);
 
-    const {handleSubmit} = useFormContext();
 
 
     // toggle sections

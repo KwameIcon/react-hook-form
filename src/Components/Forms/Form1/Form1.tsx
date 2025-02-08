@@ -12,7 +12,7 @@ import "react-phone-input-2/lib/style.css";
 import { getAge } from "@/utils/getAge";
 import { countryData } from "../Form2/Form2";
 import { COUNTRIES } from "@/DATA/COUNTRIES";
-import { handleClickOutside } from "@/utils/closeDropDowns";
+import { FieldDataItem, FieldsData } from "@/Types/FormDatatypes";
 
 
 
@@ -89,13 +89,13 @@ export default function Form1() {
 
 
     // Dropdown item click handler:
-    const handleDateSelect = (field: any, item: any) => {
+    const handleDateSelect = (field: FieldsData, item: FieldDataItem) => {
         if (field.id === 'month') {
             setSelectedMonth(item.id);
         } else if (field.id === 'day') {
-            setSelectedDay(parseInt(item.id, 10));
+            setSelectedDay(item.id);
         } else if (field.id === 'year') {
-            setSelectedYear(parseInt(item.id, 10));
+            setSelectedYear(item.id);
         }
         setValue(field.id, item.value, { shouldValidate: true });
         setOpenDropdown(null);

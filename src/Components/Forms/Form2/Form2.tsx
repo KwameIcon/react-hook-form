@@ -3,15 +3,16 @@
 import { TextInputField } from "@/Components/Commons";
 import React, { useEffect, useRef, useState } from "react";
 import { DAYSINMONTH, MONTHFULL, YEARS } from "@/DATA/DATEOFBIRTH";
-import { FieldValues, useFormContext } from "react-hook-form";
+import { FieldErrors, FieldValues, useFormContext } from "react-hook-form";
 import { FaExclamationCircle } from "react-icons/fa";
 import { getAge } from "@/utils/getAge";
 import { COUNTRIES } from "@/DATA/COUNTRIES";
+import { FieldDataItem, FieldsData, FormDataTypes } from "@/Types/FormDatatypes";
 
 // Form2 types
 type Form2Props = {
     fieldIndex: number;
-    errors: Record<string, any>;
+    errors: FieldErrors<FormDataTypes>;
 }
 
 export type countryData = {
@@ -68,18 +69,18 @@ export default function Form2({ fieldIndex, errors }: Form2Props) {
 
 
 
-    // Dropdown item click handler:
-    const handleDateSelect = (field: any, item: any) => {
-        if (field.id === 'month') {
-            setSelectedMonth(item.id);
-        } else if (field.id === 'day') {
-            setSelectedDay(parseInt(item.id, 10));
-        } else if (field.id === 'year') {
-            setSelectedYear(parseInt(item.id, 10));
-        }
-        setValue(`otherTravelers.${fieldIndex}.${field.id}`, item.value, { shouldValidate: true });
-        setOpenDropdown(null);
-    };
+        // Dropdown item click handler:
+        const handleDateSelect = (field: FieldsData, item: FieldDataItem) => {
+            if (field.id === 'month') {
+                setSelectedMonth(item.id);
+            } else if (field.id === 'day') {
+                setSelectedDay(item.id);
+            } else if (field.id === 'year') {
+                setSelectedYear(item.id);
+            }
+            setValue(field.id, item.value, { shouldValidate: true });
+            setOpenDropdown(null);
+        };
 
 
 
