@@ -20,19 +20,24 @@ export default {
       },
       keyframes: {
         slideInFromRight: {
-          "0%" : {transform: "translateX(100%)", opacity: '0'},
-          "100%" : {transform: "translateX(0)", opacity: '1'},
+          "0%": { transform: "translateX(100%)", opacity: '0' },
+          "100%": { transform: "translateX(0)", opacity: '1' },
         },
         fadeIn: {
-          "0%" : {opacity: '0'},
-          "100%" : {opacity: '1'},
+          "0%": { opacity: '0' },
+          "100%": { opacity: '1' },
+        },
+        slideFromTop: {
+          "0%": { opacity: '0', transform: "translateY(-100%)" },
+          "100%": { opacity: '1', transform: "translateY(0%)" },
         }
       },
       animation: {
         animateRgith: 'slideInFromRight 1s ease-in',
-        fadeIn: 'fadeIn 0.3s ease-in'
+        fadeIn: 'fadeIn 0.3s ease-in',
+        animateTop: "slideFromTop 1.5s ease-in"
       }
     },
   },
-plugins: [],
+  plugins: [],
 } satisfies Config;

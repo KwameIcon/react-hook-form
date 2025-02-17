@@ -1,20 +1,9 @@
-export const getAge = (month: number | undefined, day: number | undefined, year: number | undefined) => {
-    if (!month || !day || !year) return null;
-    const today = new Date();
-    const birthDate = new Date(year, month - 1, day);
+export const getAge = (month: number | null, day: number | null, year: number | null) => {
+    if(!month || !day || !year) return;
 
-    // If the selected birth year is in the future, return 0
-    if (birthDate > today) {
-        return 0;
-    }
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-
-    // Check if the birthday hasn't occurred yet this year
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-
-    return age;
+    const birthday = new Date(year, month - 1, day);
+    const currentDate = new Date();
+    const ageInMilliseconds = currentDate.getTime() - birthday.getTime();
+    const ageInYears = Math.floor(ageInMilliseconds / (1000 * 60 * 60 * 24 * 365.25));
+    return ageInYears;
 };

@@ -10,7 +10,7 @@ type FormLayoutProps = {
 export default function FormLayout({ children, header }: FormLayoutProps) {
 
     return (
-        <section className="w-full grid grid-cols-1 gap-2">
+        <section className="w-full grid grid-cols-1 gap-2 relative">
             <h1 className="text-2xl text-primary font-bold capitalize">
                 {header}
             </h1>

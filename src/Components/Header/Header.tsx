@@ -29,7 +29,7 @@ export default function Header() {
 
 
     return (
-        <section className={`w-full px-3 xl:px-2 h-16 ${isFixed ? 'fixed top-0 w-full lg:w-screen xl:w-10/12 xxl:w-3/5 m-auto z-50 bg-white shadow shadow-primary/30' : 'relative'} flex items-center justify-between`}>
+        <section className={`w-full px-3 xl:px-2 h-16 ${isFixed ? 'fixed top-0 w-full lg:w-screen xl:w-10/12 xxl:w-3/5 m-auto z-50 bg-white shadow shadow-primary/30 animate-animateTop' : 'relative'} flex items-center justify-between`}>
 
             {/* Logo */}
             <div className="w-auto h-full flex items-center justify-center">

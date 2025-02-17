@@ -11,6 +11,7 @@ import masterCard from "../../../public/payments/mastercard.webp"
 import acpr from "../../../public/logo-acpr-bdf.webp";
 import orias from "../../../public/orias.webp";
 import { useEffect, useState } from "react";
+import { LEGALDOCUMENTS } from "@/DATA/LEGALDOCUMENTS";
 
 
 export default function Footer() {
@@ -18,13 +19,15 @@ export default function Footer() {
     const [showNavigation, setShowNavigation] = useState(false);
 
 
+
     useEffect(() => {
-        setShowNavigation(window.innerWidth > 768)
+        setShowNavigation(window.innerWidth > 768);
     },[])
 
 
+
     return (
-        <section className="grid grid-cols-1 gap-16 px-5 xl:px-0 py-8">
+        <section className="grid grid-cols-1 gap-5 px-5 xl:px-0 py-8">
 
             {/* first layer */}
             <div className="w-[95%] m-auto lg:w-full grid grid-cols-1 gap-5 lg:flex lg:items-start lg:justify-between">
@@ -45,10 +48,10 @@ export default function Footer() {
                 </div>
 
 
-                <div className="grid grid-cols-1 place-items-start gap-10">
+                <div className="grid grid-cols-1 place-items-start gap-5">
                     <h2 className="uppercase text-xl lg:text-lg font-bold flex items-center gap-1 cursor-pointer lg:cursor-auto" onClick={() => setShowNavigation(prev => !prev)}>
                         <span>navigate safe</span>
-                        <FaAngleDown className="lg:hidden"/>
+                        <FaAngleDown className="lg:hidden" />
                     </h2>
                     <div className={`overflow-hidden flex flex-wrap lg:flex-nowrap items-start md:justify-start lg:justify-between gap-5 md:gap-2 lg:gap-5 transition-all duration-300 ease-in-out ${showNavigation ? "max-h-[400px] opacity-100" : "max-h-0 opacity-0"} lg:h-auto`}>
                         <PrimaryCard className="max-w-52 h-[4.5rem] flex items-center justify-center">
@@ -140,14 +143,15 @@ export default function Footer() {
 
 
             {/* third layer */}
-            <ul className="w-full flex flex-wrap items-center justify-start lg:justify-center gap-3 md:gap-5 text-sm">
-                <li className="text-primary/80 cursor-pointer capitalize font-semibold transition-colors duration-200 ease-linear hover:text-primary/50">Legal notice</li>
-                <li className="text-primary/80 cursor-pointer capitalize font-semibold transition-colors duration-200 ease-linear hover:text-primary/50">General Conditions of use</li>
-                <li className="text-primary/80 cursor-pointer capitalize font-semibold transition-colors duration-200 ease-linear hover:text-primary/50">privacy policy</li>
-                <li className="text-primary/80 cursor-pointer capitalize font-semibold transition-colors duration-200 ease-linear hover:text-primary/50">Cookies policy</li>
-                <li className="text-primary/80 cursor-pointer capitalize font-semibold transition-colors duration-200 ease-linear hover:text-primary/50">Disclaimer</li>
-                <li className="text-primary/80 capitalize font-semibold">Insurte &Copy; 2025</li>
+            <ul className="w-full flex flex-wrap items-center justify-start lg:justify-center gap-3 md:gap-5 mt-5 text-sm">
+                {LEGALDOCUMENTS.map(doc => (
+                    <li key={doc.id} className="text-primary/80 cursor-pointer capitalize font-semibold transition-colors duration-200 ease-linear hover:text-primary/50">{doc.linkText}</li>
+                ))}
             </ul>
+
+
+            {/* copy right  */}
+            <div className="w-full text-center text-primary/50 capitalize font-semibold">Insurte &Copy; 2025</div>
 
         </section>
     )

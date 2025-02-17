@@ -5,8 +5,9 @@ export interface Traveler {
     passport: string;
     nationality: string;
     month: string;
-    day: number | null;
+    week: number | null;
     year: number | null;
+    dateOfBirth: string | null;
 }
 
 export interface FormDataTypes {
@@ -20,8 +21,9 @@ export interface FormDataTypes {
     passport: string;
     nationality: string;
     month: string;
-    day: number | null;
+    week: number | null;
     year: number | null;
+    dateOfBirth: string | null;
     otherTravelers: Traveler[];
 }
 
